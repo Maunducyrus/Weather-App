@@ -11,17 +11,7 @@ use App\Http\Controllers\WeatherController;
 |
 */
 
-// Optionally: API versioning (e.g., /api/v1/weather)
-Route::prefix('v1')->group(function () {
-    // Public routes (no auth required)
-    Route::get('/weather', [WeatherController::class, 'getWeather']);
-    
-    // Protected routes (auth required)
-    Route::middleware('auth:sanctum')->group(function () {
-        // Example: Save user's favorite cities
-        Route::post('/weather/save', [WeatherController::class, 'saveLocation']);
-    });
-});
+Route::get('/weather', [WeatherController::class, 'getWeather']);
 
 // Fallback for undefined API routes
 Route::fallback(function () {

@@ -9,26 +9,19 @@ class WeatherController extends Controller
 {
     public function getWeather(Request $request)
     {
+        // Validate the city name input
         $request->validate([
             'city' => 'required|string',
-            'units' => 'nullable|in:metric,imperial'
         ]);
 
-        $apiKey = env('OPENWEATHER_API_KEY');
-        $city = $request->input('city');
-        $units = $request->input('units', 'metric');
-
-        $response = Http::get("https://api.openweathermap.org/data/2.5/weather", [
-            'q' => $city,
-            'appid' => $apiKey,
-            'units' => $units
+        // Fetch weather data from OpenWeatherMap API
+        $response = Http::get('https://api.openweathermap.org/data/2.5/weather', [
+            'q' => $request->input('city'),
+            'appid' => env('OPENWEATHERMAP_API_KEY'), 
+            'units' => 'metric', 
         ]);
 
-        return $response->json();
-    }
-
-    public function saveLocation(Request $request)
-    {
-        // Example protected route logic
+        // Return the weather data in JSON format
+        return response()->json($response->json());
     }
 }
