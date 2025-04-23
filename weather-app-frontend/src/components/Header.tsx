@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch, onUnitChange }) => {
           className="navbar-item input input-primary mr-2"
         />
         <button onClick={handleSearch} className="btn btn-primary navbar-item">
-          Go
+          Search
         </button>
       </div>
       <div className="navbar-end flex space-x-2">
